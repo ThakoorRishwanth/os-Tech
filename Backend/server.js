@@ -5,7 +5,7 @@ const db_uri = process.env.MONGO_URI
 const connectToDb = require('./config/db')
 const router = require('./routes/userRoutes')
 const app = express();
-const cors = requier('cors')
+const cors = require('cors')
 
 app.use(cors())
 
