@@ -1,4 +1,4 @@
-import { Box, Button, VStack } from '@chakra-ui/react'
+import { Box, Button, Text, VStack } from '@chakra-ui/react'
 import React from 'react'
 
 export const UserCard = ({user, onDelete}) => {

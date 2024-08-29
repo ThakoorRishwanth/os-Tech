@@ -7,14 +7,13 @@ import axios from 'axios';
 export const Fetch = () => {
     const [users, setUsers] = useState([]);
     const [refresh, setRefresh] = useState(false);
+
     const { isOpen, onOpen, onClose } = useDisclosure();
     const toast = useToast();
 
-    // Function to fetch user data from the API
     const fetchData = async () => {
         try {
-            const response = await axios.get('https://os-tech.onrender.com/api/users');
-            console.log(response.data)
+            const response = await axios.get("https://os-tech.onrender.com/api/users");
             setUsers(response.data);
         } catch (err) {
             console.error(err);
@@ -28,7 +27,10 @@ export const Fetch = () => {
         }
     };
 
-    // Function to add a new user
+    useEffect(() => {
+        fetchData();
+    }, [refresh]);
+
     const handleAddUser = async (user) => {
         try {
             await axios.post('https://os-tech.onrender.com/api/users', user);
@@ -52,10 +54,9 @@ export const Fetch = () => {
         }
     };
 
-    // Function to delete a user by ID
     const handleDeleteUser = async (id) => {
         try {
-            await axios.delete(`https://os-tech.onrender.com/api/users/${id}`);
+            await axios.delete(`https://os-tech.onrender.com/api/user/${id}`);
             setRefresh(!refresh);
             toast({
                 title: "User deleted.",
@@ -75,11 +76,6 @@ export const Fetch = () => {
             });
         }
     };
-
-    // Fetch data when component mounts or refresh state changes
-    useEffect(() => {
-        fetchData();
-    }, [refresh]);
 
     return (
         <Box p={4}>
